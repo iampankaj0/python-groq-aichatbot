@@ -1,0 +1,468 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sixtyfour+Convergence&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>AI Chat Bot - Ritika Yadav</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Lobster", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        overflow-x: hidden;
+      }
+
+      .logo {
+        font-family: "Shadows Into Light", cursive;
+      }
+
+      .design_font {
+        font-family: "Sixtyfour Convergence", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+        font-variation-settings: "BLED" 0, "SCAN" 0, "XELA" 0, "YELA" 0;
+      }
+
+      .chat_main {
+        background-color: #2f2f2f;
+        color: #f2f2f2;
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+      }
+
+      @keyframes changeColor {
+        0% {
+          color: #2f2f2f;
+        }
+        50% {
+          color: #f2f2f2;
+        }
+      }
+
+      /* CONTAINER LAYOUT STYLE */
+      @media screen and (min-width: 576px) {
+        .container {
+          max-width: 540px;
+          margin: 0 auto;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        .container {
+          max-width: 720px;
+          margin: 0 auto;
+        }
+      }
+
+      @media screen and (min-width: 992px) {
+        .container {
+          max-width: 960px;
+          margin: 0 auto;
+        }
+      }
+
+      @media screen and (min-width: 1200px) {
+        .container {
+          max-width: 1140px;
+          margin: 0 auto;
+        }
+      }
+
+      @media screen and (min-width: 1400px) {
+        .container {
+          max-width: 1320px;
+          margin: 0 auto;
+        }
+      }
+
+      @media screen and (max-width: 576px) {
+        .container {
+          max-width: 100%;
+          margin: 0 15px;
+        }
+      }
+
+      .navbar {
+        padding: 15px 0;
+        background-color: #cc0000;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+      .navbar .nav_content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .navbar .nav_content .logo {
+        font-size: 25px;
+        cursor: pointer;
+      }
+      .navbar .nav_content .logo span {
+        font-weight: 700;
+        color: #2f2f2f;
+        animation: changeColor 0.5s infinite linear;
+      }
+      .navbar .nav_content .social_links {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+      }
+      .nav_content .social_links p {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #2f2f2f;
+        color: #f2f2f2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border: 1px solid #f2f2f2;
+        transition: 0.4s;
+        font-size: 20px;
+      }
+
+      .nav_content .social_links p:hover {
+        color: #2f2f2f;
+        background-color: #f2f2f2;
+        border-color: #2f2f2f;
+      }
+
+      .without_chat_page {
+        padding: 85px 0 15px;
+        box-sizing: border-box;
+        transition: 0.4s;
+      }
+
+      .without_chat_page h1 {
+        font-size: 25px;
+        text-align: center;
+        margin-top: 10px;
+        line-height: 1.5;
+      }
+      .without_chat_page p.description {
+        font-size: 16px;
+        text-align: center;
+        margin-top: 15px;
+        line-height: 1.5;
+        color: #8080808c;
+      }
+      .without_chat_page .banner_img {
+        width: 100%;
+        max-width: 300px;
+        display: block;
+        margin: 0 auto;
+      }
+      .without_chat_page .start_btn {
+        padding: 10px 20px;
+        display: block;
+        margin: 15px auto 0;
+        display: flex;
+        align-items: center;
+        column-gap: 5px;
+        border-radius: 50px;
+        border: 1px solid #cc0000;
+        box-shadow: 1px 2px 5px 1px grey;
+        cursor: pointer;
+        transition: 0.4s;
+      }
+
+      .without_chat_page .start_btn i {
+        font-size: 20px;
+        color: #cc0000;
+      }
+
+      .without_chat_page .start_btn:hover {
+        background: #2f2f2f;
+        color: #f2f2f2;
+      }
+
+      .input_section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background-color: #f2f2f2;
+        width: -webkit-fill-available;
+        padding: 15px;
+        border-radius: 15px 15px 0 0;
+        display: flex;
+        align-items: center;
+      }
+      .input_section input {
+        height: 40px;
+        width: 90%;
+        border-radius: 7px;
+        border: 1px solid grey;
+        outline: none;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
+      .input_section button {
+        border: 1px solid grey;
+        height: 40px;
+        width: 40px;
+        margin-left: 10px;
+        border-radius: 7px;
+        cursor: pointer;
+      }
+
+      .hide_without_chat_page {
+        position: absolute;
+        left: -200%;
+        top: 0;
+        transition: 0.4s;
+      }
+
+      .user_chat_sec {
+        height: calc(100vh - 150px);
+        margin-top: 75px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        overflow-y: auto;
+      }
+
+      .user_chat_sec .my_chat {
+        padding: 5px 15px;
+        font-size: 16px;
+        background: #000;
+        border-radius: 15px;
+        color: #f2f2f2;
+        max-width: 700px;
+        width: fit-content;
+        border-bottom: 2px solid #f2f2f2;
+        margin-left: auto;
+        line-height: 1.5;
+      }
+
+      .user_chat_sec .bot_chat {
+        padding: 5px 15px;
+        font-size: 16px;
+        background: #cc00002c;
+        border-radius: 15px;
+        color: #f2f2f2;
+        max-width: 700px;
+        width: fit-content;
+        border-bottom: 2px solid #000;
+        line-height: 1.5;
+        box-shadow: inset 1px 2px 5px 2px #2f2f2f;
+      }
+
+      @media screen and (max-width: 575px) {
+        .without_chat_page h1 {
+          font-size: 22px;
+        }
+        .input_section input {
+          width: 80%;
+        }
+      }
+
+      ol {
+        margin-left: 15px;
+      }
+
+      #chat_content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+      }
+
+      #chat_content h2 {
+        line-height: 1.5;
+        font-size: 20px;
+      }
+      #chat_content p {
+        line-height: 1.5;
+      }
+      #chat_content p span {
+        color: #cc0000;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="chat_main">
+      <div class="navbar">
+        <div class="container">
+          <div class="nav_content">
+            <div class="logo" onclick="window.location.reload()">
+              <span>AI</span> Chat Bot
+            </div>
+            <div class="social_links">
+              <p>
+                <i class="fa-brands fa-facebook"></i>
+              </p>
+              <p>
+                <i class="fa-brands fa-instagram"></i>
+              </p>
+              <p>
+                <i class="fa-brands fa-github"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- WITHOUT CHAT SECTION START -->
+      <div class="container">
+        <div class="without_chat_page" id="without_chat_page">
+          <h1 class="design_font">Hello from Ritika Yadav!</h1>
+          <p class="description">
+            Your Smart Assistant for Seamless Interactions, Click on below
+            button to start chat with your AI Smart Assistant
+          </p>
+          <img
+            class="banner_img"
+            src="../static/images/chat_banner.png"
+            alt="chat_banner"
+          />
+          <button class="start_btn" onclick="hidePromotionalPage()">
+            <i class="fa-solid fa-message"></i> Start Chat
+          </button>
+        </div>
+      </div>
+      <!-- WITHOUT CHAT SECTION ENDS -->
+
+      <!-- CHAT SECTION START -->
+      <div class="container">
+        <div class="user_chat_sec" id="user_chat_sec" style="display: none">
+          <div id="chat_content">
+            <div>
+              <h2 class="design_font">Hello, I'm Ritika Yadav.</h2>
+              <p>Now you can start a consversation with <span>My AI Chat Bot</span>...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- CHAT SECTION ENDS -->
+
+      <!-- INPUT SECTION START -->
+      <form class="input_section" id="form_id" style="display: none">
+        <input
+          type="text"
+          placeholder="Search anything related to your query"
+          id="inputText"
+        />
+        <button class="search_btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+      <!-- INPUT SECTION ENDS -->
+    </div>
+
+    <script>
+      const without_chat_page = document.querySelector("#without_chat_page");
+      const user_chat_sec = document.querySelector("#user_chat_sec");
+      const form_id = document.querySelector("#form_id");
+      const inputText = document.querySelector("#inputText");
+      const chat_content = document.querySelector("#chat_content");
+      const chatContainer = document.querySelector("#user_chat_sec");
+
+      function hidePromotionalPage() {
+        without_chat_page.style.display = "none";
+        user_chat_sec.style.display = "flex";
+        form_id.style.display = "block";
+      }
+
+      window.onload = function () {
+        document
+          .getElementById("form_id")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault(); // Prevents the page reload
+            chat_content.style.display = "none";
+            const inputValue = inputText.value;
+            if (inputValue) {
+              const questionSpan = document.createElement("div");
+              questionSpan.classList.add("my_chat");
+              questionSpan.innerHTML = inputValue;
+              chatContainer.appendChild(questionSpan);
+
+              const answerSpan = document.createElement("div");
+              answerSpan.classList.add("bot_chat");
+              answerSpan.innerHTML = "Loading...";
+              chatContainer.appendChild(answerSpan);
+
+              try {
+                const response = await fetch("http://127.0.0.1:5000/chat", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ question: inputValue }),
+                });
+
+                if (!response.ok) {
+                  throw new Error("Network response was not ok");
+                }
+
+                const data = await response.json();
+                // answerSpan.innerHTML = data.answer;
+                answerSpan.innerHTML = "";
+
+                const words = data.answer.split(" ");
+                let wordIndex = 0;
+
+                // Function to display words one by one
+                const displayWords = () => {
+                  if (wordIndex < words.length) {
+                    answerSpan.innerHTML +=
+                      (wordIndex > 0 ? " " : "") + words[wordIndex];
+                    wordIndex++;
+                    // Scroll to bottom of chatContainer
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                  } else {
+                    clearInterval(intervalId); // Stop interval when done
+                    // Scroll to bottom of chatContainer
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                  }
+                };
+
+                // Start displaying words with a delay
+                const intervalId = setInterval(displayWords, 10); // Adjust delay as needed
+              } catch (error) {
+                console.error(
+                  "There has been a problem with your fetch operation:",
+                  error
+                );
+                answerSpan.innerHTML = "Error fetching answer"; // Display error message
+              } finally {
+                // Scroll to bottom of chatContainer
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+              }
+            } else {
+              alert("Please send your query...");
+            }
+          });
+      };
+    </script>
+  </body>
+</html>
